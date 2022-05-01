@@ -13,7 +13,7 @@ class ArticleRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return true; //-- この行を変更
     }
 
     /**
@@ -25,7 +25,10 @@ class ArticleRequest extends FormRequest
     {
         return [
             'title' => 'required|max:50',
-            'body' => 'required|max:500',
+            // 'body' => 'required|max:500',
+            'kg' => 'integer|max:9999',
+            'count' => 'integer|max:9999',
+            'set' => 'integer|max:9999',
             'tags' => 'json|regex:/^(?!.*\s).+$/u|regex:/^(?!.*\/).*$/u',
         ];
     }
@@ -33,8 +36,11 @@ class ArticleRequest extends FormRequest
     public function attributes()
     {
         return [
-            'title' => 'タイトル',
-            'body' => '本文',
+            'title' => 'トレーニング名',
+            // 'body' => '本文',
+            'kg' => '重量',
+            'count' => '回数',
+            'set' => 'セット',
             'tags' => 'タグ',
         ];
     }

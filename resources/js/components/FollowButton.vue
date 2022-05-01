@@ -29,9 +29,10 @@
         type: String,
       },
     },
+
     data() {
       return {
-        isFollowedBy: this.initialIsFollowedBy,
+        isFollowedBy:  this.initialIsFollowedBy,
       }
     },
     computed: {

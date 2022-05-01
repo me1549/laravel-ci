@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Tag;
 use App\Http\Requests\ArticleRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    //
     public function __construct()
     {
         $this->authorizeResource(Article::class, 'article');
@@ -16,8 +18,8 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = Article::all()->sortByDesc('created_at')
-            ->load(['user', 'likes', 'tags']);
+        $all_articles = Article::orderBy('created_at', 'desc');
+        $articles = $all_articles->with(['user', 'likes', 'tags'])->paginate(5);
 
         return view('articles.index', ['articles' => $articles]);
     }
@@ -73,7 +75,6 @@ class ArticleController extends Controller
             $tag = Tag::firstOrCreate(['name' => $tagName]);
             $article->tags()->attach($tag);
         });
-
         return redirect()->route('articles.index');
     }
 

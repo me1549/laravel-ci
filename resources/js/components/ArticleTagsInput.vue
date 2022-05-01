@@ -8,7 +8,7 @@
     <vue-tags-input
       v-model="tag"
       :tags="tags"
-      placeholder="タグを5個まで入力できます"
+      placeholder="鍛えた部位を5個まで入力できます"
       :add-on-key="[13, 32]"
       :autocomplete-items="filteredItems"
       @tags-changed="newTags => tags = newTags"
@@ -18,7 +18,6 @@
 
 <script>
   import VueTagsInput from '@johmun/vue-tags-input';
-
   export default {
     components: {
       VueTagsInput,
