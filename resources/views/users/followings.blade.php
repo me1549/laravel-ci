@@ -6,6 +6,7 @@
   @include('nav')
   <div class="container">
     @include('users.user')
+    <!-- タグ追加したら、タグもfalse -->
     @include('users.tabs', ['hasArticles' => false, 'hasLikes' => false])
     @foreach($followings as $person)
       @include('users.person')

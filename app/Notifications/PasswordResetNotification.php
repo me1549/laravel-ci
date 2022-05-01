@@ -12,18 +12,13 @@ class PasswordResetNotification extends Notification
 {
     use Queueable;
 
-    protected $token;
-    protected $mail;
+    public $token;
+    public $mail;
 
     /**
      * Create a new notification instance.
      *
      * @return void
-     */
-    /**
-     * PasswordResetNotification constructor.
-     * @param string $token
-     * @param BareMail $mail
      */
     public function __construct(string $token, BareMail $mail)
     {
@@ -48,28 +43,24 @@ class PasswordResetNotification extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    /**
-     * @param $notifiable
-     * @return BareMail
-     */
-    public function toMail($notifiable): BareMail
+    public function toMail($notifiable)
     {
         return $this->mail
-            ->from(config('mail.from.address'), config('mail.from.name'))
-            ->to($notifiable->email)
-            ->subject('[memo]パスワード再設定')
-            ->text('emails.password_reset')
-            ->with([
-                'url' => route('password.reset', [
-                    'token' => $this->token,
-                    'email' => $notifiable->email,
-                ]),
-                'count' => config(
-                    'auth.passwords.' .
-                    config('auth.defaults.passwords') .
-                    '.expire'
-                ),
-            ]);
+        ->from(config('mail.from.address'), config('mail.from.name'))
+        ->to($notifiable->email)
+        ->subject('[memo]パスワード再設定')
+        ->text('emails.password_reset')
+        ->with([
+            'url' => route('password.reset', [
+                'token' => $this->token,
+                'email' => $notifiable->email,
+            ]),
+            'count' => config(
+                'auth.passwords.' .
+                config('auth.defaults.passwords') .
+                '.expire'
+            ),
+        ]);
     }
 
     /**
