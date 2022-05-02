@@ -52,7 +52,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'alpha_num', 'min:3', 'max:16', 'unique:users'],
+            'name' => ['required', 'string', 'alpha_num', 'min:3', 'max:16', 'unique:users'], //-- この行を変更
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -92,7 +92,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'alpha_num', 'min:3', 'max:16', 'unique:users'],
             'token' => ['required', 'string'],
         ]);
-
+        
         $token = $request->token;
 
         $providerUser = Socialite::driver($provider)->userFromToken($token);

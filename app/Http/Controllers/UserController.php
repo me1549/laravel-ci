@@ -63,8 +63,7 @@ class UserController extends Controller
     {
         $user = User::where('name', $name)->first();
 
-        if ($user->id === $request->user()->id)
-        {
+        if ($user->id === $request->user()->id) {
             return abort('404', 'Cannot follow yourself.');
         }
 
@@ -78,8 +77,7 @@ class UserController extends Controller
     {
         $user = User::where('name', $name)->first();
 
-        if ($user->id === $request->user()->id)
-        {
+        if ($user->id === $request->user()->id) {
             return abort('404', 'Cannot follow yourself.');
         }
 

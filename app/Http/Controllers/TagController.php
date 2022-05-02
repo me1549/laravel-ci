@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    //
     public function show(string $name)
     {
         $tag = Tag::where('name', $name)->first();
